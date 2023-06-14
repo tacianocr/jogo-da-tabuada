@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tabuada</title>
+    <style>
+      body {
+        background-image: linear-gradient(to bottom right, #3fd5e9, #5e70d1);
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      
+      h1 {
+        font-size: 4em;
+        color: #ebe6e6;
+        margin-top: 30px;
+      }
+      
+      #question {
+        font-size: 3em;
+        color: #f5f2f2;
+        margin-top: 30px;
+      }
+
+      input {
+        padding: 20px;
+        border-radius: 20px;
+      }
+
+      button {
+        font-size: 2em;
+        margin: 20px;
+        padding: 20px 20px;
+        border: none;
+        border-radius: 30px;
+        background-color: #fff;
+        color: #3950d1;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      
+      button:hover {
+        background-color: #3950d3a1;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tabuada</h1>
+    <p id="question"></p>
+    <input type="text" id="answer" placeholder="Digite a resposta" autocomplete="off">
+    <button id="check">Verificar</button>
+    <script>
+      let score = 0;
+      let questionNumber = 1;
+      
+      const questionElement = document.getElementById("question");
+      const answerElement = document.getElementById("answer");
+      const checkButton = document.getElementById("check");
+      
+      function generateQuestion() {
+        const number1 = Math.floor(Math.random() * 9) + 1;
+        const number2 = Math.floor(Math.random() * 9) + 1;
+       
+        
+        const operation = "x";
+        
+        questionElement.textContent = `${number1} ${operation} ${number2} = ?`;
+        
+        const correctAnswer = number1 * number2;
+        answerElement.value = "";
+        
+        checkButton.onclick = function() {
+          const userAnswer = parseInt(answerElement.value);
+          if (userAnswer === correctAnswer) {
+            score++;
+            alert("Parabéns, você acertou!");
+          } else {
+            alert(`Resposta incorreta! A resposta correta é ${correctAnswer}.`);
+          }
+          
+          questionNumber++;
+          if (questionNumber <= 10) {
+            generateQuestion();
+          } else {
+            alert(`Fim de jogo! Sua pontuação foi ${score}.`);
+          }
+        };
+      }
+      
+      generateQuestion();
+    </script>
+  </body>
+</html>
